@@ -66,7 +66,7 @@ if (defined(request_method()) and request_method() eq "POST") {
 	);
 	push(@values, \%hash_values);
 	if(file_write(FILE_JSON, encode_json({"values" => \@values}))) {
-		print("Data logged:<br/><pre>"
+		print("Data logged:<br /><pre>"
 				. "\nTime stamp:\t$time_stamp"
 				. "\nStation:\t" . $cgi->param("text_stations")
 				. "\nTime:\t" . $cgi->param("text_time")
@@ -76,7 +76,7 @@ if (defined(request_method()) and request_method() eq "POST") {
 				. "\nTemperatures:\t" . $cgi->param("text_temperatures")
 				. "\nQNH:\t" . $cgi->param("text_qnh")
 				. "\nAny significant weather:\t" . $cgi->param("text_significant_weather")
-				. "\nRemarks:\t" . $cgi->param("text_remarks") . "<pre><hr />");
+				. "\nRemarks:\t" . $cgi->param("text_remarks") . "</pre><hr />");
 	} else {
 		print("Failed to write to file '" . FILE_JSON . "'!");
 	}
