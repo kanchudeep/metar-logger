@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>METAR Logger</title>
+</head>
+<body>
+<h1 align="center">METAR Logger</h1>
+<form name="form" action="../perl/metar.pl" method="post">
+	<table align="center">
+		<tr>
+			<td><label for="text_station">Station name</label></td>
+			<td>:</td>
+			<td><input type="text" value="VAAH" name="text_station" id="text_station"></td>
+		</tr>
+		<tr>
+			<td><label for="text_time">Time (Zulu)</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_time" id="text_time"></td>
+		</tr>
+		<tr>
+			<td><label for="text_wind">Wind</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_wind" id="text_wind" value="18003KT"></td>
+		</tr>
+		<tr>
+			<td><label for="text_visibility">Visibility</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_visibility" id="text_visibility" value="5000 HAZE"></td>
+		</tr>
+		<tr>
+			<td><label for="text_clouding">Clouding</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_clouding" id="text_clouding" value="SCT020 SCT100"></td>
+		</tr>
+		<tr>
+			<td><label for="text_temperatures">Temperature/Dew point</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_temperatures" id="text_temperatures" value="30/20"></td>
+		</tr>
+		<tr>
+			<td><label for="text_qnh">QNH</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_qnh" id="text_qnh" value="Q1011"></td>
+		</tr>
+		<tr>
+			<td><label for="text_significant_weather">Any significant weather</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_significant_weather" id="text_significant_weather"></td>
+		</tr>
+		<tr>
+			<td><label for="text_remarks">Remarks</label></td>
+			<td>:</td>
+			<td><input type="text" name="text_remarks" id="text_remarks"></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><input type="submit"></td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript">
+// Method to zero pad number (including negatives and fractions) to a specified length
+function zeroPad(number, /* default: 2 */ lengthPadded) {
+	if (typeof lengthPadded === "undefined")
+		lengthPadded = 2;
+	var stringNumber = number.toString();
+	stringNumber = stringNumber.split(".");
+	stringNumber[0] = String(Math.abs(stringNumber[0]));
+	while (stringNumber[0].length < lengthPadded)
+		stringNumber[0] = "0" + stringNumber[0];
+	if (number < 0)
+		stringNumber[0] = "-" + stringNumber[0];
+	return stringNumber[1] ? stringNumber[0] + "." + stringNumber[1] : stringNumber[0];
+}
+
+// Populate time (Zulu)
+document.form.text_time.value = zeroPad((new Date()).getUTCDate())
+		+ zeroPad((new Date()).getUTCHours()) + zeroPad((new Date()).getUTCMinutes());
+</script>
+</body>
+</html>
